@@ -4,18 +4,16 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Post;
-import net.thucydides.model.environment.SystemEnvironmentVariables;
-import net.thucydides.model.util.EnvironmentVariables;
 import udea.edu.co.calidad.automation_project.models.CustomerModel;
 
 public class CreateCustomer implements Task {
 
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String url = environmentVariables.getProperty("webdriver.base.url");
-
     private final CustomerModel customerModel;
 
     public CreateCustomer(CustomerModel customerModel) {
+        if (customerModel == null) {
+            throw new IllegalArgumentException("CustomerModel cannot be null");
+        }
         this.customerModel = customerModel;
     }
 
@@ -25,9 +23,11 @@ public class CreateCustomer implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Post.to(url + "/customer")
-                .with(request -> request.header("Content-Type", "application/json")
-                .body(customerModel)));
-    };
-
+        actor.attemptsTo(
+            Post.to("/customer")
+                .with(request -> request
+                    .header("Content-Type", "application/json")
+                    .body(customerModel))
+        );
+    }
 }

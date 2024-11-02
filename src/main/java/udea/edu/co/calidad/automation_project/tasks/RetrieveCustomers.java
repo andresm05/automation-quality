@@ -14,7 +14,7 @@ public class RetrieveCustomers implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-            Get.resource("/customers")
+            Get.resource("/customer")
         );
     }
 }

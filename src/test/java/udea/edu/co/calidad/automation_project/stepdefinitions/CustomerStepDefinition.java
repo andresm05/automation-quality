@@ -7,38 +7,45 @@ import io.cucumber.java.en.Then;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import udea.edu.co.calidad.automation_project.models.CustomerModel;
-import udea.edu.co.calidad.automation_project.questions.CustomerInList;
 import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
+import udea.edu.co.calidad.automation_project.questions.ResponseCode;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.Matchers.is;
+import net.serenitybdd.screenplay.Actor;
+import udea.edu.co.calidad.automation_project.tasks.HasAccess;
 
 public class CustomerStepDefinition {
 
+    Actor author = Actor.named("author");
+
     @Before
-    public void config() {
+    public void setup() {
         OnStage.setTheStage(new OnlineCast());
-        OnStage.theActorCalled("user");
+        OnStage.theActorCalled("author");
     }
 
-    @Given("I have a new customer")
-    public void iHaveANewCustomer() {
-        CustomerModel customer = new CustomerModel("John Doe", "john.doe@example.com", "1234567890", "123 Main St");
-        OnStage.theActorInTheSpotlight().remember("newCustomer", customer);
+    @Given("I have access to the system")
+    public void iHaveAccessToTheSystem() {
+        author.attemptsTo(
+                HasAccess.toTheApi()
+        );
     }
 
     @When("I create a new customer")
     public void iCreateANewCustomer() {
-        CustomerModel customer = OnStage.theActorInTheSpotlight().recall("newCustomer");
-        OnStage.theActorInTheSpotlight().attemptsTo(
+        double number  = Math.random();
+        CustomerModel customer = new CustomerModel("John Doe", "john.doe@example.com" + number, "1234567890", "123 Main St");
+        author.remember("newCustomer", customer);
+        author.attemptsTo(
                 CreateCustomer.withDetails(customer)
         );
     }
 
-    @Then("I should see the customer in the list")
-    public void iShouldSeeTheCustomerInTheList() {
-        CustomerModel expectedCustomer = OnStage.theActorInTheSpotlight().recall("newCustomer");
-
-        OnStage.theActorInTheSpotlight().should(
-                seeThat("the customer is in the list", CustomerInList.matches(expectedCustomer))
+    @Then("the customer should be saved in the system")
+    public void theCustomerShouldBeSavedInTheSystem() {
+        author.should(
+                seeThat("The response code is 200",
+                        ResponseCode.status(), is(201))
         );
     }
 
