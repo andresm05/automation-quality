@@ -10,9 +10,12 @@ import udea.edu.co.calidad.automation_project.models.CustomerModel;
 import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+
 import static org.hamcrest.Matchers.is;
+
 import net.serenitybdd.screenplay.Actor;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
+import udea.edu.co.calidad.automation_project.tasks.RetrieveCustomers;
 
 public class CustomerStepDefinition {
 
@@ -33,7 +36,7 @@ public class CustomerStepDefinition {
 
     @When("I create a new customer")
     public void iCreateANewCustomer() {
-        double number  = Math.random();
+        double number = Math.random();
         CustomerModel customer = new CustomerModel("John Doe", "john.doe@example.com" + number, "1234567890", "123 Main St");
         author.remember("newCustomer", customer);
         author.attemptsTo(
@@ -49,4 +52,18 @@ public class CustomerStepDefinition {
         );
     }
 
+    @When("I retrieve all customers")
+    public void iRetrieveAllCustomers() {
+        author.attemptsTo(
+                RetrieveCustomers.list()
+        );
+    }
+
+    @Then("I should see the list of customers")
+    public void iShouldSeeTheListOfCustomers() {
+        author.should(
+                seeThat("The response code is 200",
+                        ResponseCode.status(), is(200))
+        );
+    }
 }

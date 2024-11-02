@@ -7,3 +7,8 @@ Feature: Customer management
      Given I have access to the system
      When I create a new customer
      Then the customer should be saved in the system
+
+    Scenario: Retrieve all customers
+     Given I have access to the system
+     When I retrieve all customers
+     Then I should see the list of customers
