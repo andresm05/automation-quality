@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Customer management" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-04T03:09:44" hostname="DESKTOP-EMUEAVU" time="6.602">
+<testsuite name="Customer management" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-04T22:48:20" hostname="ANDRÉS" time="5.002">
   <properties/>
-  <testcase name="Create a new customer" classname="Customer management" time="5.344"/>
-  <testcase name="Retrieve all customers" classname="Customer management" time="1.258"/>
+  <testcase name="Create a new customer" classname="Customer management" time="4.383"/>
+  <testcase name="Retrieve all customers" classname="Customer management" time="0.619"/>
   <system-out><![CDATA[
 Scenario: Create a new customer                   ?[90m# src/test/resources/features/customer/customer.feature:6?[0m
-  ?[32mGiven ?[0m?[32mI have access to the system?[0m               ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.iHaveAccessToTheSystem()?[0m
-  ?[32mWhen ?[0m?[32mI create a new customer?[0m                    ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.iCreateANewCustomer()?[0m
-  ?[32mThen ?[0m?[32mthe customer should be saved in the system?[0m ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.theCustomerShouldBeSavedInTheSystem()?[0m
+  ?[32mGiven ?[0m?[32mI have access to the system?[0m               ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.iHaveAccessToTheSystem()?[0m
+  ?[32mWhen ?[0m?[32mI create a new customer?[0m                    ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.iCreateANewCustomer()?[0m
+  ?[32mThen ?[0m?[32mthe customer should be saved in the system?[0m ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.theCustomerShouldBeSavedInTheSystem()?[0m
 
 Scenario: Retrieve all customers          ?[90m# src/test/resources/features/customer/customer.feature:11?[0m
-  ?[32mGiven ?[0m?[32mI have access to the system?[0m       ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.iHaveAccessToTheSystem()?[0m
-  ?[32mWhen ?[0m?[32mI retrieve all customers?[0m           ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.iRetrieveAllCustomers()?[0m
-  ?[32mThen ?[0m?[32mI should see the list of customers?[0m ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.CustomerStepDefinition.iShouldSeeTheListOfCustomers()?[0m
+  ?[32mGiven ?[0m?[32mI have access to the system?[0m       ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.iHaveAccessToTheSystem()?[0m
+  ?[32mWhen ?[0m?[32mI retrieve all customers?[0m           ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.iRetrieveAllCustomers()?[0m
+  ?[32mThen ?[0m?[32mI should see the list of customers?[0m ?[90m# udea.edu.co.calidad.automation_project.stepdefinitions.customer.CustomerStepDefinition.iShouldSeeTheListOfCustomers()?[0m
 ]]></system-out>
   <system-err><![CDATA[[Test worker] INFO  - 
   _____   ___   ___   _____     ___   _____     _     ___   _____   ___   ___  

@@ -1,19 +1,18 @@
 package udea.edu.co.calidad.automation_project.stepdefinitions.customer;
 
+import static org.hamcrest.Matchers.is;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import net.serenitybdd.screenplay.Actor;
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import udea.edu.co.calidad.automation_project.models.CustomerModel;
-import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-
-import static org.hamcrest.Matchers.is;
-
-import net.serenitybdd.screenplay.Actor;
+import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
 import udea.edu.co.calidad.automation_project.tasks.RetrieveCustomers;
 
@@ -46,7 +45,7 @@ public class CustomerStepDefinition {
     @Then("the customer should be saved in the system")
     public void theCustomerShouldBeSavedInTheSystem() {
         author.should(
-                seeThat("The response code is 200",
+                seeThat("The response code is 201",
                         ResponseCode.status(), is(201)));
     }
 

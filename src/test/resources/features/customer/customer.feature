@@ -12,3 +12,8 @@ Feature: Customer management
      Given I have access to the system
      When I retrieve all customers
      Then I should see the list of customers
+
+    Scenario: Create a customer with existing email
+     Given I have access to the system
+     When I create a new customer with existing email
+     Then I should see an error message
