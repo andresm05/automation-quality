@@ -13,7 +13,7 @@ public class HasAccess implements Task {
     private final String url;
 
     public HasAccess() {
-        this.url = environmentVariables.getProperty("serenity.base.url", "http://localhost:8089");
+        this.url = environmentVariables.getProperty("serenity.base.url", "https://calidadappapi.azurewebsites.net");
     }
 
     public static HasAccess toTheApi() {

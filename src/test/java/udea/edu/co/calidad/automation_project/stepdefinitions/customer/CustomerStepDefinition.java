@@ -1,4 +1,4 @@
-package udea.edu.co.calidad.automation_project.stepdefinitions;
+package udea.edu.co.calidad.automation_project.stepdefinitions.customer;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -30,40 +30,36 @@ public class CustomerStepDefinition {
     @Given("I have access to the system")
     public void iHaveAccessToTheSystem() {
         author.attemptsTo(
-                HasAccess.toTheApi()
-        );
+                HasAccess.toTheApi());
     }
 
     @When("I create a new customer")
     public void iCreateANewCustomer() {
         double number = Math.random();
-        CustomerModel customer = new CustomerModel("John Doe", "john.doe@example.com" + number, "1234567890", "123 Main St");
+        CustomerModel customer = new CustomerModel("John Doe", "john.doe@example.com" + number, "1234567890",
+                "123 Main St");
         author.remember("newCustomer", customer);
         author.attemptsTo(
-                CreateCustomer.withDetails(customer)
-        );
+                CreateCustomer.withDetails(customer));
     }
 
     @Then("the customer should be saved in the system")
     public void theCustomerShouldBeSavedInTheSystem() {
         author.should(
                 seeThat("The response code is 200",
-                        ResponseCode.status(), is(201))
-        );
+                        ResponseCode.status(), is(201)));
     }
 
     @When("I retrieve all customers")
     public void iRetrieveAllCustomers() {
         author.attemptsTo(
-                RetrieveCustomers.list()
-        );
+                RetrieveCustomers.list());
     }
 
     @Then("I should see the list of customers")
     public void iShouldSeeTheListOfCustomers() {
         author.should(
                 seeThat("The response code is 200",
-                        ResponseCode.status(), is(200))
-        );
+                        ResponseCode.status(), is(200)));
     }
 }
