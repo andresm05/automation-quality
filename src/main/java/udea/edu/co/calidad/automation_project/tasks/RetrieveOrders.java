@@ -6,10 +6,10 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 
-public class RetriveOrders implements Task {
+public class RetrieveOrders implements Task {
 
-    public static RetriveOrders list() {
-        return instrumented(RetriveOrders.class);
+    public static RetrieveOrders list() {
+        return instrumented(RetrieveOrders.class);
     }
 
     @Override

@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Order management" skipped="0" tests="1" time="0.05" timestamp="2024-11-04 11:51:00"><testcase name="Create a new order"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Order management" skipped="0" tests="3" time="0.07" timestamp="2024-11-04 01:06:05"><testcase name="Create a new order"/><testcase name="Retrieve all orders"/><testcase name="Retrieve oder by id"/></testsuite>

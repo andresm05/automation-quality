@@ -15,6 +15,8 @@ import udea.edu.co.calidad.automation_project.models.OrderModel;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
 import udea.edu.co.calidad.automation_project.tasks.CreateOrder;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
+import udea.edu.co.calidad.automation_project.tasks.RetrieveOrders;
+import udea.edu.co.calidad.automation_project.tasks.RetrieveOrderById;
 
 import java.time.LocalDate;
 
@@ -53,4 +55,35 @@ public class OrdersStepDefinition {
                         ResponseCode.status(), is(201)));
 
     }
+
+    @When("I retrieve all orders")
+    public void iRetrieveAllOrders() {
+        author.attemptsTo(
+            RetrieveOrders.list());
+
+    }
+
+    @Then("I should see the list of orders")
+    public void iShouldSeeTheListOfOrders() {
+        author.should(
+                seeThat("The response code is 200",
+                        ResponseCode.status(), is(200)));
+    }
+
+    @When("I retrieve order by id")
+    public void iRetrieveTheOrderById() {       
+        author.attemptsTo(
+            RetrieveOrderById.forOrder("1")
+        );        
+    }
+
+    @Then("I should see the order with the given id")
+    public void iShouldSeeTheOrderWithTheGivenId() {
+        author.should(
+            seeThat("The response code is 200",
+                ResponseCode.status(), is(200))
+        );
+    }
+
+    
 }
