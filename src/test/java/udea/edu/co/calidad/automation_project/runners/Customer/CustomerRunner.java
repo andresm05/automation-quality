@@ -1,7 +1,8 @@
-package udea.edu.co.calidad.automation_project.runners.customer;
+package udea.edu.co.calidad.automation_project.runners.Customer;
 
 
 import org.junit.runner.RunWith;
+
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 

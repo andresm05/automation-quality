@@ -61,4 +61,20 @@ public class CustomerStepDefinition {
                 seeThat("The response code is 200",
                         ResponseCode.status(), is(200)));
     }
+
+    @When("I create a new customer with existing email")
+    public void iCreateANewCustomerWithExistingEmail() {
+        CustomerModel existingCustomer = new CustomerModel("Jane Doe", "john.doe@example.com", "1234567890", "123 Main St");
+        author.remember("existingCustomer", existingCustomer);
+        author.attemptsTo(
+                CreateCustomer.withDetails(existingCustomer)
+        );
+    }
+
+    @Then("I should see an error message")
+    public void iShouldSeeAnErrorMessage() {
+        author.should(
+                seeThat("The response code indicates an error",
+                        ResponseCode.status(), is(500)));
+    }
 }
