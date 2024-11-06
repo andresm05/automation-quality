@@ -1,4 +1,4 @@
-package udea.edu.co.calidad.automation_project.runners.Customer;
+package udea.edu.co.calidad.automation_project.runners.customer;
 
 
 import org.junit.runner.RunWith;

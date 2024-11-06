@@ -12,6 +12,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import udea.edu.co.calidad.automation_project.models.CustomerModel;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
+import udea.edu.co.calidad.automation_project.questions.ResponseEmail;
 import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
 import udea.edu.co.calidad.automation_project.tasks.RetrieveCustomers;
@@ -44,6 +45,12 @@ public class CustomerStepDefinition {
 
     @Then("the customer should be saved in the system")
     public void theCustomerShouldBeSavedInTheSystem() {
+        CustomerModel newCustomer = author.recall("newCustomer");
+        String expectedEmail = newCustomer.getEmail();
+        author.should(
+                seeThat("The email is correct",
+                        ResponseEmail.email(), is(expectedEmail)));
+
         author.should(
                 seeThat("The response code is 201",
                         ResponseCode.status(), is(201)));

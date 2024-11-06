@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+
 import static org.hamcrest.Matchers.is;
 
 import udea.edu.co.calidad.automation_project.models.OrderModel;
@@ -19,6 +20,8 @@ import udea.edu.co.calidad.automation_project.tasks.RetrieveOrders;
 import udea.edu.co.calidad.automation_project.tasks.RetrieveOrderById;
 
 import java.time.LocalDate;
+
+import udea.edu.co.calidad.automation_project.questions.ResponseOrderId;
 
 public class OrdersStepDefinition {
 
@@ -59,7 +62,7 @@ public class OrdersStepDefinition {
     @When("I retrieve all orders")
     public void iRetrieveAllOrders() {
         author.attemptsTo(
-            RetrieveOrders.list());
+                RetrieveOrders.list());
 
     }
 
@@ -71,19 +74,24 @@ public class OrdersStepDefinition {
     }
 
     @When("I retrieve order by id")
-    public void iRetrieveTheOrderById() {       
+    public void iRetrieveTheOrderById() {
         author.attemptsTo(
-            RetrieveOrderById.forOrder("1")
-        );        
+                RetrieveOrderById.forOrder("1")
+        );
     }
 
     @Then("I should see the order with the given id")
     public void iShouldSeeTheOrderWithTheGivenId() {
+        String expectedOrderId = "1";
+
         author.should(
-            seeThat("The response code is 200",
-                ResponseCode.status(), is(200))
+                seeThat("The order id is correct",
+                        ResponseOrderId.orderId(), is(expectedOrderId))
+        );
+        author.should(
+                seeThat("The response code is 200",
+                        ResponseCode.status(), is(200))
         );
     }
 
-    
 }
