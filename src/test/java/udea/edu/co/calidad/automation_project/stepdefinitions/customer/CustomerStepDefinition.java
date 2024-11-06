@@ -82,6 +82,6 @@ public class CustomerStepDefinition {
     public void iShouldSeeAnErrorMessage() {
         author.should(
                 seeThat("The response code indicates an error",
-                        ResponseCode.status(), is(500)));
+                        ResponseCode.status(), is(400)));
     }
 }
