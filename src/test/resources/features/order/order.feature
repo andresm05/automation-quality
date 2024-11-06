@@ -17,3 +17,9 @@ Feature: Order management
         Given I have access to the system
         When I retrieve order by id
         Then I should see the order with the given id
+
+    Scenario: Retrieve order with invalid id
+        Given I have access to the system
+        When I retrieve order with invalid id
+        Then I should see an error message
+    

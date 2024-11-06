@@ -13,6 +13,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import udea.edu.co.calidad.automation_project.models.CustomerModel;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
 import udea.edu.co.calidad.automation_project.questions.ResponseEmail;
+import udea.edu.co.calidad.automation_project.questions.ResponseErrorMessage;
 import udea.edu.co.calidad.automation_project.tasks.CreateCustomer;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
 import udea.edu.co.calidad.automation_project.tasks.RetrieveCustomers;
@@ -80,6 +81,14 @@ public class CustomerStepDefinition {
 
     @Then("I should see an error message")
     public void iShouldSeeAnErrorMessage() {
+
+        String expectedEmail = ((CustomerModel) author.recall("existingCustomer")).getEmail();
+        String expectedMessage = "Customer with email: " + expectedEmail + " already exist";
+
+        author.should(
+                seeThat("The error message is correct",
+                        ResponseErrorMessage.message(), is(expectedMessage)));
+
         author.should(
                 seeThat("The response code indicates an error",
                         ResponseCode.status(), is(400)));

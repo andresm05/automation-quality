@@ -1,27 +1,25 @@
 package udea.edu.co.calidad.automation_project.stepdefinitions.order;
 
+import java.time.LocalDate;
+
+import static org.hamcrest.Matchers.is;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-
-import static org.hamcrest.Matchers.is;
-
 import udea.edu.co.calidad.automation_project.models.OrderModel;
 import udea.edu.co.calidad.automation_project.questions.ResponseCode;
+import udea.edu.co.calidad.automation_project.questions.ResponseErrorMessage;
+import udea.edu.co.calidad.automation_project.questions.ResponseOrderId;
 import udea.edu.co.calidad.automation_project.tasks.CreateOrder;
 import udea.edu.co.calidad.automation_project.tasks.HasAccess;
-import udea.edu.co.calidad.automation_project.tasks.RetrieveOrders;
 import udea.edu.co.calidad.automation_project.tasks.RetrieveOrderById;
-
-import java.time.LocalDate;
-
-import udea.edu.co.calidad.automation_project.questions.ResponseOrderId;
+import udea.edu.co.calidad.automation_project.tasks.RetrieveOrders;
 
 public class OrdersStepDefinition {
 
@@ -91,6 +89,29 @@ public class OrdersStepDefinition {
         author.should(
                 seeThat("The response code is 200",
                         ResponseCode.status(), is(200))
+        );
+    }
+
+    @When("I retrieve order with invalid id")
+    public void iRetrieveTheOrderWithInvalidId() {
+        author.attemptsTo(
+                RetrieveOrderById.forOrder("100")
+        );
+    }
+
+    @Then("I should see an error message")
+    public void iShouldSeeAnErrorMessage() {
+        String expectedId = "100";
+        String expectedErrorMessage = "Order with id: " + expectedId + " not found";
+
+        author.should(
+                seeThat("The error message is correct",
+                        ResponseErrorMessage.message(), is(expectedErrorMessage))
+        );
+
+        author.should(
+                seeThat("The response code is 400",
+                        ResponseCode.status(), is(400))
         );
     }
 
